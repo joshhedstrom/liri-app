@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/joshhedstrom/liri-app/issues"
   },
-  "homepage": "https://github.com/joshhedstrom/liri-app#readme"
+  "homepage": "https://github.com/joshhedstrom/liri-app#readme",
+  "dependencies": {
+    "node-spotify-api": "^1.0.7"
+  }
 }
