@@ -2,7 +2,7 @@
   "name": "liri-app",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "liri.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/joshhedstrom/liri-app#readme",
   "dependencies": {
-    "node-spotify-api": "^1.0.7"
+    "dotenv": "^5.0.1",
+    "inquirer": "^5.2.0",
+    "node-spotify-api": "^1.0.7",
+    "node-twitter-api": "^1.8.0",
+    "twitter": "^1.7.1"
   }
 }

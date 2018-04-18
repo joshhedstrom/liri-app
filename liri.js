@@ -1,34 +1,53 @@
-require("./.env").config();
+require("dotenv").config();
+const keys = require('./keys.js');
+const Spotify = require('node-spotify-api');
+const Twitter = require('twitter');
 const request = require('request');
-const spotify = new Spotify(keys.spotify);
-const client = new Twitter(keys.twitter);
+let spotify = new Spotify(keys.spotify);
+let client = new Twitter(keys.twitter);
 
 let action = process.argv[2];
 let item = process.argv[3];
 
 switch (action) {
     case 'my-tweets':
-    let query = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=josh_hedstrom&count=2"
-        request(query, (error, response, body)=> {
-        	// if(err) return console.log(err);
+        const props = {
+            user_id: "josh_hedstrom",
+            count: 20,
+            exclude_replies: true,
+            include_rts: true,
+            trim_user: true,
 
-        	console.log('twitter: ' + query);
-        	console.log(body)
-
+        }
+        client.get('statuses/user_timeline', props, (err, body, res) => {
+            if (err) return console.log(err);
+            body.forEach((elem, i) => {
+                console.log('---->>Tweet #', i + 1, '--------------------', 'on: ', elem.created_at);
+                console.log('');
+                console.log('---->>', elem.text);
+                console.log('');
+                console.log('-----------------------------------------------------------------------------------------');
+                console.log('');
+            });
         })
         break;
+
     case 'spotify-this-song':
-        // statements_1
+
         break;
+
     case 'movie-this':
         // statements_1
         break;
+
     case 'do-what-it-says':
         // statements_1
         break;
+
     default:
-        // statements_def
+        console.log("I'm sorry, I didn't understand that command.")
         break;
+
 }
 
 // * `my-tweets`
@@ -38,3 +57,9 @@ switch (action) {
 // * `movie-this`
 
 // * `do-what-it-says`
+
+
+// var inquirer = require('inquirer');
+// inquirer.prompt([ Pass your questions in here ]).then(answers => {
+// 	// Use user feedback for... whatever!!
+// });
