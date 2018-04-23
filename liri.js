@@ -8,12 +8,17 @@ let spotify = new Spotify(keys.spotify);
 let client = new Twitter(keys.twitter);
 let randomCommand;
 
+const moment = require('moment');
+let time = moment();
+let time_format = time.format('YYYY-MM-DD HH:mm:ss Z');
+
 let action = process.argv[2];
 let item = process.argv[3];
 
 main();
 
 function main() {
+    log();
     switch (action) {
         case 'my-tweets':
             tweetAction();
@@ -112,5 +117,11 @@ function randomAction() {
         action = splitArr[0].trim();
         item = splitArr[1].trim();
         main();
+    })
+};
+
+function log() {
+    fs.appendFile('./log.txt', `Action: ${action} || Item: ${item} || Time: ${time_format} \n`, (err) => {
+        if (err) return console.log('ERROR: ', err);
     })
 };
